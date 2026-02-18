@@ -1,3 +1,4 @@
+import 'package:character_game/screens/home/character_card.dart';
 import 'package:character_game/shared/styled_button.dart';
 import 'package:character_game/shared/styled_text.dart';
 import 'package:flutter/material.dart';
@@ -28,14 +29,7 @@ Widget build(BuildContext context) {
             child: ListView.builder(
               itemCount: Characters.length,
               itemBuilder: (_, index) {
-                return(
-                  Container(
-                    color: Colors.grey[800],
-                    padding: EdgeInsets.all(40),
-                    margin: EdgeInsets.only(bottom: 40),
-                    child: Text(Characters[index]),
-                  )
-                );
+                return CharacterCard(Characters[index]);
               }
             )
           ),
