@@ -1,4 +1,5 @@
 import 'package:character_game/screens/home/character_card.dart';
+import 'package:character_game/models/character.dart';
 import 'package:character_game/shared/styled_button.dart';
 import 'package:character_game/shared/styled_text.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List Characters = ['mario', 'luigi', 'peach', 'toad', 'bowser', 'koopa'];
 
 @override
 Widget build(BuildContext context) {
@@ -27,9 +27,9 @@ Widget build(BuildContext context) {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: Characters.length,
+              itemCount: characters.length,
               itemBuilder: (_, index) {
-                return CharacterCard(Characters[index]);
+                return CharacterCard(characters[index]);
               }
             )
           ),
