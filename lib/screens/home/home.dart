@@ -1,3 +1,4 @@
+import 'package:character_game/screens/create/create.dart';
 import 'package:character_game/screens/home/character_card.dart';
 import 'package:character_game/models/character.dart';
 import 'package:character_game/shared/styled_button.dart';
@@ -35,7 +36,11 @@ Widget build(BuildContext context) {
           ),
 
           StyledButton(
-            onPressed: () {}, 
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (ctx) => Create(),
+                ));
+            }, 
             child: const StyledHeadline('Create New'),
 
           )
