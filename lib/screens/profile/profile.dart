@@ -1,6 +1,7 @@
 import 'package:character_game/models/character.dart';
 import 'package:character_game/screens/profile/skill_list.dart';
 import 'package:character_game/screens/profile/stats_table.dart';
+import 'package:character_game/shared/styled_button.dart';
 import 'package:character_game/shared/styled_text.dart';
 import 'package:character_game/theme.dart';
 import 'package:flutter/material.dart';
@@ -90,7 +91,17 @@ class Profile extends StatelessWidget {
             ),
 
             // save button 
-
+            StyledButton(
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: StyledText('Character Saved Successfully'),
+                  showCloseIcon: true,
+                  duration: Duration(seconds: 2),
+                  backgroundColor: AppColor.secondaryColor,
+                ));
+              }, 
+              child: StyledHeadline('Save'),
+            ),
 
           ],
         ),

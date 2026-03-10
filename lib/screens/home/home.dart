@@ -1,9 +1,10 @@
 import 'package:character_game/screens/create/create.dart';
 import 'package:character_game/screens/home/character_card.dart';
-import 'package:character_game/models/character.dart';
+import 'package:character_game/services/character_store.dart';
 import 'package:character_game/shared/styled_button.dart';
 import 'package:character_game/shared/styled_text.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -27,10 +28,14 @@ Widget build(BuildContext context) {
       child: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              itemCount: characters.length,
-              itemBuilder: (_, index) {
-                return CharacterCard(characters[index]);
+            child: Consumer<CharacterStore>(
+              builder: (context, value, child) {
+                return ListView.builder(
+                  itemCount: value.characters.length,
+                  itemBuilder: (_, index) {
+                    return CharacterCard(value.characters[index]);
+                  }
+                );
               }
             )
           ),
@@ -38,7 +43,7 @@ Widget build(BuildContext context) {
           StyledButton(
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(
-                builder: (ctx) => Create(),
+                builder: (ctx) => CreateScreen(),
                 ));
             }, 
             child: const StyledHeadline('Create New'),

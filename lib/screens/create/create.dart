@@ -2,24 +2,26 @@ import 'package:character_game/models/character.dart';
 import 'package:character_game/models/vocation.dart';
 import 'package:character_game/screens/create/vocation_card.dart';
 import 'package:character_game/screens/home/home.dart';
+import 'package:character_game/services/character_store.dart';
 import 'package:character_game/shared/styled_button.dart';
 import 'package:character_game/shared/styled_text.dart';
 import 'package:character_game/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();
 
 
-class Create extends StatefulWidget {
-  const Create({super.key});
+class CreateScreen extends StatefulWidget {
+  const CreateScreen({super.key});
 
   @override
-  State<Create> createState() => _CreateState();
+  State<CreateScreen> createState() => _CreateState();
 }
 
-class _CreateState extends State<Create> {
+class _CreateState extends State<CreateScreen> {
 
   final _nameController = TextEditingController();
   final _sloganController = TextEditingController();
@@ -66,7 +68,7 @@ class _CreateState extends State<Create> {
       showDialog(context: context, builder: (ctx) {
         return AlertDialog(
           title: const StyledHeadline('Missing Slogan'),
-          content: const StyledText('You must enter a catchy slogan...'),
+          content: const StyledText('You must enter a catchy sloganScreen...'),
           actions: [
             StyledButton(
               onPressed: () => Navigator.pop(ctx), 
@@ -84,6 +86,15 @@ class _CreateState extends State<Create> {
       slogan: _sloganController.text.trim(), 
       vocation: selectedVocation,
     ));
+
+    Provider.of<CharacterStore>(context, listen: false)
+      .addCharacter(Character(
+        id: uuid.v4(), 
+        name: _nameController.text.trim(), 
+        slogan: _sloganController.text.trim(), 
+        vocation: selectedVocation,
+      )
+      );
 
     Navigator.push(context, MaterialPageRoute(
       builder: (ctx) => Home(),
